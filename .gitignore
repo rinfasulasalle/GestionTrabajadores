@@ -1,0 +1,10 @@
+# Archivos generados por Python
+*.pyc
+__pycache__/
+
+# Archivos generados por Flask
+instance/
+.flaskenv
+
+# Archivos generados por el entorno virtual
+myvenv

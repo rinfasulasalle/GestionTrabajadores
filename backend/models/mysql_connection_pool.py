@@ -18,7 +18,7 @@ class MySQLPool(object):
     request connection, create connection and close connection.
     """
     def __init__(self):             
-        self.pool = self.create_pool(pool_name='task_pool', pool_size=6)
+        self.pool = self.create_pool(pool_name='task_pool', pool_size=3)
 
     def create_pool(self, pool_name, pool_size):
         """
