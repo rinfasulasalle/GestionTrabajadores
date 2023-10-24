@@ -67,7 +67,7 @@ CREATE TABLE sueldo (
 
 CREATE TABLE contrato (
   id INT NOT NULL AUTO_INCREMENT UNIQUE,
-  id_trabajador VARCHAR(20) NOT NULL UNIQUE, -- FK uario_id
+  id_trabajador VARCHAR(20) NOT NULL UNIQUE,
   contrato_tipo VARCHAR(255) NOT NULL, -- X, a plazo, de extranjeroo, etc
   contrato_opcion VARCHAR(255) NOT NULL, -- EPS o no
   empleo_tipo VARCHAR(50) NOT NULL, -- ejecutivo, empleado
