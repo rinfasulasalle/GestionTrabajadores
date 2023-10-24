@@ -10,6 +10,7 @@ from backend.blueprints.sueldo_blueprint import sueldo_blueprint
 from backend.blueprints.contrato_blueprint import contrato_blueprint
 from backend.blueprints.cuenta_bancaria_blueprint import cuenta_bancaria_blueprint
 from backend.blueprints.direccion_blueprint import direccion_blueprint
+from backend.blueprints.estudio_blueprint import estudio_blueprint
 
 app = Flask(__name__)
 
@@ -19,6 +20,7 @@ app.register_blueprint(sueldo_blueprint)
 app.register_blueprint(contrato_blueprint)
 app.register_blueprint(cuenta_bancaria_blueprint)
 app.register_blueprint(direccion_blueprint)
+app.register_blueprint(estudio_blueprint)
 
 cors = CORS(app)
 

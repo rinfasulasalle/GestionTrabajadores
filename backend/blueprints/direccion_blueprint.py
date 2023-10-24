@@ -22,28 +22,28 @@ def create_direccion():
 @cross_origin()
 def update_direccion():
     data = request.json
-    id = data['id']
+    id_trabajador = data['id_trabajador']
     direccion_pais = data['direccion_pais']
     direccion_departamento = data['direccion_departamento']
     direccion_provincia = data['direccion_provincia']
     direccion_distrito = data['direccion_distrito']
     direccion_detalle = data['direccion_detalle']
-    content = direccion_model.update_direccion(id, direccion_pais, direccion_departamento, direccion_provincia, direccion_distrito, direccion_detalle)
+    content = direccion_model.update_direccion(id_trabajador, direccion_pais, direccion_departamento, direccion_provincia, direccion_distrito, direccion_detalle)
     return jsonify(content)
 
 @direccion_blueprint.route('/direccion', methods=['DELETE'])
 @cross_origin()
 def delete_direccion():
-    id = request.json['id']
-    direccion_model.delete_direccion(id)
+    id_trabajador = request.json['id_trabajador']
+    direccion_model.delete_direccion(id_trabajador)
     result = {'result': 1}
     return jsonify(result)
 
 @direccion_blueprint.route('/direccion', methods=['GET'])
 @cross_origin()
 def get_direccion():
-    id = request.json['id']
-    return jsonify(direccion_model.get_direccion(id))
+    id_trabajador = request.json['id_trabajador']
+    return jsonify(direccion_model.get_direccion(id_trabajador))
 
 @direccion_blueprint.route('/direcciones', methods=['GET'])
 @cross_origin()

@@ -18,9 +18,9 @@ class DireccionModel:
         cursor = self.mysql_pool.execute(query, data, commit=True)
         return data
 
-    def update_direccion(self, id, direccion_pais, direccion_departamento, direccion_provincia, direccion_distrito, direccion_detalle):
+    def update_direccion(self, id_trabajador, direccion_pais, direccion_departamento, direccion_provincia, direccion_distrito, direccion_detalle):
         data = {
-            'id': id,
+            'id_trabajador': id_trabajador,
             'direccion_pais': direccion_pais,
             'direccion_departamento': direccion_departamento,
             'direccion_provincia': direccion_provincia,
@@ -32,19 +32,19 @@ class DireccionModel:
                    direccion_provincia = %(direccion_provincia)s, 
                    direccion_distrito = %(direccion_distrito)s, 
                    direccion_detalle = %(direccion_detalle)s
-                   WHERE id = %(id)s"""
+                   WHERE id_trabajador = %(id_trabajador)s"""
         self.mysql_pool.execute(query, data, commit=True)
         result = {'result': 1}
         return result
 
-    def delete_direccion(self, id):
-        params = {'id': id}
-        query = "DELETE FROM direccion WHERE id = %(id)s"
+    def delete_direccion(self, id_trabajador):
+        params = {'id_trabajador': id_trabajador}
+        query = "DELETE FROM direccion WHERE id_trabajador = %(id_trabajador)s"
         self.mysql_pool.execute(query, params, commit=True)
     
-    def get_direccion(self, id):
-        query = "SELECT * FROM direccion WHERE id = %(id)s"
-        params = {'id': id}
+    def get_direccion(self, id_trabajador):
+        query = "SELECT * FROM direccion WHERE id_trabajador = %(id_trabajador)s"
+        params = {'id_trabajador': id_trabajador}
         rv = self.mysql_pool.execute(query, params)
         data = []
         content = {}
