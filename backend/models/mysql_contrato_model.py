@@ -22,9 +22,9 @@ class ContratoModel:
         cursor = self.mysql_pool.execute(query, data, commit=True)
         return data
 
-    def update_contrato(self, id, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo):
+    def update_contrato(self, id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo):
         data = {
-            'id': id,
+            'id_trabajador': id_trabajador,
             'contrato_tipo': contrato_tipo,
             'contrato_opcion': contrato_opcion,
             'empleo_tipo': empleo_tipo,
@@ -42,19 +42,19 @@ class ContratoModel:
                    empleo_proyecto = %(empleo_proyecto)s,
                    empleo_departamento = %(empleo_departamento)s,
                    empleo_cargo = %(empleo_cargo)s
-                   WHERE id = %(id)s"""
+                   WHERE id_trabajador = %(id_trabajador)s"""
         self.mysql_pool.execute(query, data, commit=True)
         result = {'result': 1}
         return result
 
-    def delete_contrato(self, id):
-        params = {'id': id}
-        query = "DELETE FROM contrato WHERE id = %(id)s"
+    def delete_contrato(self, id_trabajador):
+        params = {'id_trabajador': id_trabajador}
+        query = "DELETE FROM contrato WHERE id = %(id_trabajador)s"
         self.mysql_pool.execute(query, params, commit=True)
     
-    def get_contrato(self, id):
-        query = "SELECT * FROM contrato WHERE id = %(id)s"
-        params = {'id': id}
+    def get_contrato(self, id_trabajador):
+        query = "SELECT * FROM contrato WHERE id_trabajador = %(id_trabajador)s"
+        params = {'id_trabajador': id_trabajador}
         rv = self.mysql_pool.execute(query, params)
         data = []
         content = {}

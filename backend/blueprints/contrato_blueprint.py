@@ -25,7 +25,7 @@ def create_contrato():
 @cross_origin()
 def update_contrato():
     data = request.json
-    id = data['id']
+    id_trabajador = data['id_trabajador']
     contrato_tipo = data['contrato_tipo']
     contrato_opcion = data['contrato_opcion']
     empleo_tipo = data['empleo_tipo']
@@ -34,22 +34,22 @@ def update_contrato():
     empleo_proyecto = data['empleo_proyecto']
     empleo_departamento = data['empleo_departamento']
     empleo_cargo = data['empleo_cargo']
-    content = contrato_model.update_contrato(id, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo)
+    content = contrato_model.update_contrato(id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo)
     return jsonify(content)
 
 @contrato_blueprint.route('/contrato', methods=['DELETE'])
 @cross_origin()
 def delete_contrato():
-    id = request.json['id']
-    contrato_model.delete_contrato(id)
+    id_trabajador = request.json['id_trabajador']
+    contrato_model.delete_contrato(id_trabajador)
     result = {'result': 1}
     return jsonify(result)
 
 @contrato_blueprint.route('/contrato', methods=['GET'])
 @cross_origin()
 def get_contrato():
-    id = request.json['id']
-    return jsonify(contrato_model.get_contrato(id))
+    id_trabajador = request.json['id_trabajador']
+    return jsonify(contrato_model.get_contrato(id_trabajador))
 
 @contrato_blueprint.route('/contratos', methods=['GET'])
 @cross_origin()
