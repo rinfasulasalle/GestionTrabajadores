@@ -48,8 +48,8 @@ class SueldoModel:
                 'id_trabajador': result[1],
                 'sueldo_valor_básico': float(result[2]),
                 'sueldo_asigfam_porcentaje': float(result[3]) if result[3] is not None else None,
-                'sueldo_bono_porcentaje': float(result[4]) if result[4] is not None else None,
-                'sueldo_asignacion_familiar': float(result[5]) if result[5] is not None else None,
+                'sueldo_asignacion_familiar': float(result[4]) if result[4] is not None else None,
+                'sueldo_bono_porcentaje': float(result[5]) if result[5] is not None else None,
                 'sueldo_monto_bono': float(result[6]) if result[6] is not None else None,
                 'sueldo_mensual': float(result[7]) if result[7] is not None else None,
                 'sueldo_anual': float(result[8]) if result[8] is not None else None,
@@ -69,7 +69,11 @@ class SueldoModel:
                 'id_trabajador': result[1],
                 'sueldo_valor_básico': float(result[2]),
                 'sueldo_asigfam_porcentaje': float(result[3]) if result[3] is not None else None,
-                'sueldo_bono_porcentaje': float(result[4])
+                'sueldo_asignacion_familiar': float(result[4]) if result[4] is not None else None,
+                'sueldo_bono_porcentaje': float(result[5]) if result[5] is not None else None,
+                'sueldo_monto_bono': float(result[6]) if result[6] is not None else None,
+                'sueldo_mensual': float(result[7]) if result[7] is not None else None,
+                'sueldo_anual': float(result[8]) if result[8] is not None else None,
             }
             data.append(content)
             content = {}
