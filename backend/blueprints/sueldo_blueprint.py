@@ -20,26 +20,26 @@ def create_sueldo():
 @cross_origin()
 def update_sueldo():
     data = request.json
-    id = data['id']
+    id_trabajador = data['id_trabajador']
     sueldo_valor_básico = data['sueldo_valor_básico']
     sueldo_asigfam_porcentaje = data['sueldo_asigfam_porcentaje']
     sueldo_bono_porcentaje = data['sueldo_bono_porcentaje']
-    content = sueldo_model.update_sueldo(id, sueldo_valor_básico, sueldo_asigfam_porcentaje, sueldo_bono_porcentaje)
+    content = sueldo_model.update_sueldo(id_trabajador, sueldo_valor_básico, sueldo_asigfam_porcentaje, sueldo_bono_porcentaje)
     return jsonify(content)
 
 @sueldo_blueprint.route('/sueldo', methods=['DELETE'])
 @cross_origin()
 def delete_sueldo():
-    id = request.json['id']
-    sueldo_model.delete_sueldo(id)
+    id_trabajador = request.json['id_trabajador']
+    sueldo_model.delete_sueldo(id_trabajador)
     result = {'result': 1}
     return jsonify(result)
 
 @sueldo_blueprint.route('/sueldo', methods=['GET'])
 @cross_origin()
 def get_sueldo():
-    id = request.json['id']
-    return jsonify(sueldo_model.get_sueldo(id))
+    id_trabajador = request.json['id_trabajador']
+    return jsonify(sueldo_model.get_sueldo(id_trabajador))
 
 @sueldo_blueprint.route('/sueldos', methods=['GET'])
 @cross_origin()

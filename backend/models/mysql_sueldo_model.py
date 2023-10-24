@@ -16,9 +16,9 @@ class SueldoModel:
         cursor = self.mysql_pool.execute(query, data, commit=True)
         return data
 
-    def update_sueldo(self, id, sueldo_valor_básico, sueldo_asigfam_porcentaje, sueldo_bono_porcentaje):
+    def update_sueldo(self, id_trabajador, sueldo_valor_básico, sueldo_asigfam_porcentaje, sueldo_bono_porcentaje):
         data = {
-            'id': id,
+            'id_trabajador': id_trabajador,
             'sueldo_valor_básico': sueldo_valor_básico,
             'sueldo_asigfam_porcentaje': sueldo_asigfam_porcentaje,
             'sueldo_bono_porcentaje': sueldo_bono_porcentaje
@@ -26,19 +26,19 @@ class SueldoModel:
         query = """UPDATE sueldo SET sueldo_valor_básico = %(sueldo_valor_básico)s, 
                    sueldo_asigfam_porcentaje = %(sueldo_asigfam_porcentaje)s, 
                    sueldo_bono_porcentaje = %(sueldo_bono_porcentaje)s
-                   WHERE id = %(id)s"""
+                   WHERE id_trabajador = %(id_trabajador)s"""
         self.mysql_pool.execute(query, data, commit=True)
         result = {'result': 1}
         return result
 
-    def delete_sueldo(self, id):
-        params = {'id': id}
-        query = "DELETE FROM sueldo WHERE id = %(id)s"
+    def delete_sueldo(self, id_trabajador):
+        params = {'id_trabajador': id_trabajador}
+        query = "DELETE FROM sueldo WHERE id = %(id_trabajador)s"
         self.mysql_pool.execute(query, params, commit=True)
 
-    def get_sueldo(self, id):
-        query = "SELECT * FROM sueldo WHERE id = %(id)s"
-        params = {'id': id}
+    def get_sueldo(self, id_trabajador):
+        query = "SELECT * FROM sueldo WHERE id_trabajador = %(id_trabajador)s"
+        params = {'id_trabajador': id_trabajador}
         rv = self.mysql_pool.execute(query, params)
         data = []
         content = {}
