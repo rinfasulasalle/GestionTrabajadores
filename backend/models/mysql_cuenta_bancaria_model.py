@@ -17,9 +17,9 @@ class CuentaBancariaModel:
         cursor = self.mysql_pool.execute(query, data, commit=True)
         return data
 
-    def update_cuenta_bancaria(self, id, cuenta_bancaria_codigo_cci, cuenta_bancaria_codigo, cuenta_bancaria_banco, cuenta_bancaria_tipo):
+    def update_cuenta_bancaria(self, id_trabajador, cuenta_bancaria_codigo_cci, cuenta_bancaria_codigo, cuenta_bancaria_banco, cuenta_bancaria_tipo):
         data = {
-            'id': id,
+            'id_trabajador': id_trabajador,
             'cuenta_bancaria_codigo_cci': cuenta_bancaria_codigo_cci,
             'cuenta_bancaria_codigo': cuenta_bancaria_codigo,
             'cuenta_bancaria_banco': cuenta_bancaria_banco,
@@ -29,19 +29,19 @@ class CuentaBancariaModel:
                    cuenta_bancaria_codigo = %(cuenta_bancaria_codigo)s, 
                    cuenta_bancaria_banco = %(cuenta_bancaria_banco)s, 
                    cuenta_bancaria_tipo = %(cuenta_bancaria_tipo)s
-                   WHERE id = %(id)s"""
+                   WHERE id_trabajador = %(id_trabajador)s"""
         self.mysql_pool.execute(query, data, commit=True)
         result = {'result': 1}
         return result
 
-    def delete_cuenta_bancaria(self, id):
-        params = {'id': id}
-        query = "DELETE FROM cuenta_bancaria WHERE id = %(id)s"
+    def delete_cuenta_bancaria(self, id_trabajador):
+        params = {'id_trabajador': id_trabajador}
+        query = "DELETE FROM cuenta_bancaria WHERE id_trabajador = %(id_trabajador)s"
         self.mysql_pool.execute(query, params, commit=True)
 
-    def get_cuenta_bancaria(self, id):
-        query = "SELECT * FROM cuenta_bancaria WHERE id = %(id)s"
-        params = {'id': id}
+    def get_cuenta_bancaria(self, id_trabajador):
+        query = "SELECT * FROM cuenta_bancaria WHERE id_trabajador = %(id_trabajador)s"
+        params = {'id_trabajador': id_trabajador}
         rv = self.mysql_pool.execute(query, params)
         data = []
         content = {}
