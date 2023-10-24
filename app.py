@@ -7,12 +7,16 @@ from flask_cors import CORS, cross_origin
 from backend.blueprints.usuario_blueprint import usuario_blueprint
 from backend.blueprints.trabajador_blueprint import trabajador_blueprint
 from backend.blueprints.sueldo_blueprint import sueldo_blueprint
+from backend.blueprints.contrato_blueprint import contrato_blueprint
+from backend.blueprints.cuenta_bancaria_blueprint import cuenta_bancaria_blueprint
 
 app = Flask(__name__)
 
 app.register_blueprint(usuario_blueprint)
 app.register_blueprint(trabajador_blueprint)
 app.register_blueprint(sueldo_blueprint)
+app.register_blueprint(contrato_blueprint)
+app.register_blueprint(cuenta_bancaria_blueprint)
 
 cors = CORS(app)
 
