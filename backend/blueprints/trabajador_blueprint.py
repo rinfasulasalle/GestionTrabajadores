@@ -10,20 +10,17 @@ trabajador_blueprint = Blueprint('trabajador_blueprint', __name__)
 def create_trabajador():
     data = request.json
     trabajador_id = data['trabajador_id']
+    trabajador_fecha_nacimiento = data['trabajador_fecha_nacimiento']
     trabajador_tipo_documento = data['trabajador_tipo_documento']
     trabajador_path_documento = data['trabajador_path_documento']
     trabajador_nacionalidad = data['trabajador_nacionalidad']
-    trabajador_fecha_nacimiento = data['trabajador_fecha_nacimiento']
     trabajador_ubigeo = data['trabajador_ubigeo']
-    trabajador_telefono = data['trabajador_telefono']
-    trabajador_sexo = data['trabajador_sexo']
     trabajador_estado_civil = data['trabajador_estado_civil']
     trabajador_path_doc_estado_civil = data['trabajador_path_doc_estado_civil']
     trabajador_fecha_ingreso = data['trabajador_fecha_ingreso']
-    content = trabajador_model.create_trabajador(trabajador_id, trabajador_tipo_documento, trabajador_path_documento,
-                                                  trabajador_nacionalidad, trabajador_fecha_nacimiento,
-                                                  trabajador_ubigeo, trabajador_telefono, trabajador_sexo,
-                                                  trabajador_estado_civil, trabajador_path_doc_estado_civil,trabajador_fecha_ingreso)
+    trabajador_exp_previa = data['trabajador_exp_previa']
+
+    content = trabajador_model.create_trabajador(trabajador_id, trabajador_fecha_nacimiento, trabajador_tipo_documento, trabajador_path_documento, trabajador_nacionalidad, trabajador_ubigeo, trabajador_estado_civil, trabajador_path_doc_estado_civil, trabajador_fecha_ingreso,trabajador_exp_previa)
     return jsonify(content)
 
 @trabajador_blueprint.route('/trabajador', methods=['PUT'])
@@ -31,19 +28,16 @@ def create_trabajador():
 def update_trabajador():
     data = request.json
     trabajador_id = data['trabajador_id']
+    trabajador_fecha_nacimiento = data['trabajador_fecha_nacimiento']
     trabajador_tipo_documento = data['trabajador_tipo_documento']
     trabajador_path_documento = data['trabajador_path_documento']
     trabajador_nacionalidad = data['trabajador_nacionalidad']
-    trabajador_fecha_nacimiento = data['trabajador_fecha_nacimiento']
     trabajador_ubigeo = data['trabajador_ubigeo']
-    trabajador_telefono = data['trabajador_telefono']
-    trabajador_sexo = data['trabajador_sexo']
     trabajador_estado_civil = data['trabajador_estado_civil']
     trabajador_path_doc_estado_civil = data['trabajador_path_doc_estado_civil']
-    content = trabajador_model.update_trabajador(trabajador_id, trabajador_tipo_documento, trabajador_path_documento,
-                                                  trabajador_nacionalidad, trabajador_fecha_nacimiento,
-                                                  trabajador_ubigeo, trabajador_telefono, trabajador_sexo,
-                                                  trabajador_estado_civil, trabajador_path_doc_estado_civil)
+    trabajador_fecha_ingreso = data['trabajador_fecha_ingreso']
+    trabajador_exp_previa = data['trabajador_exp_previa']
+    content = trabajador_model.update_trabajador(trabajador_id, trabajador_fecha_nacimiento, trabajador_tipo_documento, trabajador_path_documento, trabajador_nacionalidad, trabajador_ubigeo, trabajador_estado_civil, trabajador_path_doc_estado_civil, trabajador_fecha_ingreso,trabajador_exp_previa)    
     return jsonify(content)
 
 @trabajador_blueprint.route('/trabajador', methods=['DELETE'])

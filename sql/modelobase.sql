@@ -23,6 +23,9 @@ CREATE TABLE usuario (
   usuario_apellidos VARCHAR(100) NOT NULL,
   usuario_correo VARCHAR(100) UNIQUE NOT NULL,
   usuario_contrasenia VARCHAR(50) NOT NULL,
+  usuario_sexo ENUM('Masculino', 'Femenino', 'No Especificado') DEFAULT 'No Especificado',
+  usuario_telefono VARCHAR(50) NOT NULL,
+  usuario_fecha_nacimiento DATE NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -31,13 +34,11 @@ CREATE TABLE trabajador (
   trabajador_tipo_documento VARCHAR(50),
   trabajador_path_documento VARCHAR(255) DEFAULT 'PATH/noNe',
   trabajador_nacionalidad VARCHAR(50) DEFAULT 'No Especificado',
-  trabajador_fecha_nacimiento DATE NOT NULL,
   trabajador_ubigeo VARCHAR(255) DEFAULT 'No Especificado',
-  trabajador_telefono VARCHAR(50) NOT NULL,
-  trabajador_sexo ENUM('Masculino', 'Femenino', 'No Especificado') DEFAULT 'No Especificado',
   trabajador_estado_civil ENUM('Soltero', 'Casado', 'Viudo', 'Divorciado', 'Conviviente', 'No Especificado') DEFAULT 'No Especificado',
   trabajador_path_doc_estado_civil VARCHAR(255) DEFAULT 'PATH/noNe',
   trabajador_fecha_ingreso_sistema DATE,
+  -- DATOS AUTOEVALUADOS 
   trabajador_fecha_ingreso DATE,
   trabajador_edad INT,
   trabajador_record DECIMAL(20,2),

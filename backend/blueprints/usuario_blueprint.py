@@ -15,7 +15,9 @@ def create_usuario():
     usuario_apellidos = data['usuario_apellidos']
     usuario_correo = data['usuario_correo']
     usuario_contrasenia = data['usuario_contrasenia']
-    content = usuario_model.create_usuario(usuario_id,usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia)
+    usuario_sexo = data['usuario_sexo']
+    usuario_telefono = data['usuario_telefono']
+    content = usuario_model.create_usuario(usuario_id,usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia, usuario_sexo,usuario_telefono)
     return jsonify(content)
 
 @usuario_blueprint.route('/usuario', methods=['PUT'])
@@ -28,7 +30,9 @@ def update_usuario():
     usuario_apellidos = data['usuario_apellidos']
     usuario_correo = data['usuario_correo']
     usuario_contrasenia = data['usuario_contrasenia']
-    content = usuario_model.update_usuario(usuario_id, usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia)
+    usuario_sexo = data['usuario_sexo']
+    usuario_telefono = data['usuario_telefono']
+    content = usuario_model.update_usuario(usuario_id,usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia, usuario_sexo, usuario_telefono)
     return jsonify(content)
 
 @usuario_blueprint.route('/usuario', methods=['DELETE'])

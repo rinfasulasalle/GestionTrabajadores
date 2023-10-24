@@ -17,7 +17,9 @@ class UsuarioModel:
                 'usuario_nombres': result[2],
                 'usuario_apellidos': result[3],
                 'usuario_correo': result[4],
-                'usuario_contrasenia': result[5]
+                'usuario_contrasenia': result[5],
+                'usuario_sexo': result[6],
+                'usuario_telefono': result[7]
             }
             data.append(content)
             content = {}
@@ -35,40 +37,48 @@ class UsuarioModel:
                 'usuario_nombres': result[2],
                 'usuario_apellidos': result[3],
                 'usuario_correo': result[4],
-                'usuario_contrasenia': result[5]
+                'usuario_contrasenia': result[5],
+                'usuario_sexo': result[6],
+                'usuario_telefono': result[7]
             }
             data.append(content)
             content = {}
         return data
 
-    def create_usuario(self, id, usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia):
+    def create_usuario(self, id, usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia,usuario_sexo,usuario_telefono,):
         data = {
             'id': id,
             'usuario_rol': usuario_rol,
             'usuario_nombres': usuario_nombres,
             'usuario_apellidos': usuario_apellidos,
             'usuario_correo': usuario_correo,
-            'usuario_contrasenia': usuario_contrasenia
+            'usuario_contrasenia': usuario_contrasenia,
+            'usuario_sexo': usuario_sexo,
+            'usuario_telefono': usuario_telefono,
         }
-        query = """INSERT INTO usuario (id,usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia) 
-                   VALUES (%(id)s, %(usuario_rol)s, %(usuario_nombres)s, %(usuario_apellidos)s, %(usuario_correo)s, %(usuario_contrasenia)s)"""
+        query = """INSERT INTO usuario (id,usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia, usuario_sexo, usuario_telefono) 
+                   VALUES (%(id)s, %(usuario_rol)s, %(usuario_nombres)s, %(usuario_apellidos)s, %(usuario_correo)s, %(usuario_contrasenia)s, %(usuario_sexo)s, %(usuario_telefono)s)"""
         cursor = self.mysql_pool.execute(query, data, commit=True)
         return data
 
-    def update_usuario(self, usuario_id, usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia):
+    def update_usuario(self, id, usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia, usuario_sexo, usuario_telefono ):
         data = {
-            'id': usuario_id,
+            'id': id,
             'usuario_rol': usuario_rol,
             'usuario_nombres': usuario_nombres,
             'usuario_apellidos': usuario_apellidos,
             'usuario_correo': usuario_correo,
-            'usuario_contrasenia': usuario_contrasenia
+            'usuario_contrasenia': usuario_contrasenia,
+            'usuario_sexo': usuario_sexo,
+            'usuario_telefono': usuario_telefono
         }
         query = """UPDATE usuario SET usuario_rol = %(usuario_rol)s, 
                    usuario_nombres = %(usuario_nombres)s, 
                    usuario_apellidos = %(usuario_apellidos)s, 
                    usuario_correo = %(usuario_correo)s, 
-                   usuario_contrasenia = %(usuario_contrasenia)s 
+                   usuario_contrasenia = %(usuario_contrasenia)s ,
+                   usuario_sexo = %(usuario_sexo)s,
+                   usuario_telefono = %(usuario_telefono)s
                    WHERE id = %(id)s"""
         self.mysql_pool.execute(query, data, commit=True)
         result = {'result': 1}
