@@ -156,3 +156,101 @@ END;
 
 
 
+-- TRUUGERS ERRORES
+CREATE TRIGGER validar_id_trabajador
+BEFORE INSERT ON sueldo
+FOR EACH ROW
+BEGIN
+    DECLARE trabajador_existente INT;
+    SET trabajador_existente = (SELECT COUNT(*) FROM trabajador WHERE trabajador_id = NEW.id_trabajador);
+    IF trabajador_existente = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador no existe en la tabla trabajador';
+    END IF;
+
+    SET trabajador_existente = (SELECT COUNT(*) FROM sueldo WHERE id_trabajador = NEW.id_trabajador);
+    IF trabajador_existente > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador ya ha sido utilizado en la tabla sueldo';
+    END IF;
+END;
+
+CREATE TRIGGER validar_id_trabajador_contrato 
+BEFORE INSERT ON contrato
+FOR EACH ROW
+BEGIN
+    DECLARE trabajador_existente INT;
+    SET trabajador_existente = (SELECT COUNT(*) FROM trabajador WHERE trabajador_id = NEW.id_trabajador);
+    IF trabajador_existente = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador no existe en la tabla trabajador';
+    END IF;
+
+    SET trabajador_existente = (SELECT COUNT(*) FROM contrato WHERE id_trabajador = NEW.id_trabajador);
+    IF trabajador_existente > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador ya ha sido utilizado en la tabla contrato';
+    END IF;
+END; 
+
+CREATE TRIGGER validar_id_trabajador_cuenta_bancaria
+BEFORE INSERT ON cuenta_bancaria
+FOR EACH ROW
+BEGIN
+    DECLARE trabajador_existente INT;
+    SET trabajador_existente = (SELECT COUNT(*) FROM trabajador WHERE trabajador_id = NEW.id_trabajador);
+    IF trabajador_existente = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador no existe en la tabla trabajador';
+    END IF;
+
+    SET trabajador_existente = (SELECT COUNT(*) FROM cuenta_bancaria WHERE id_trabajador = NEW.id_trabajador);
+    IF trabajador_existente > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador ya ha sido utilizado en la tabla cuenta_bancaria';
+    END IF;
+END;
+
+CREATE TRIGGER validar_id_trabajador_direccion
+BEFORE INSERT ON direccion
+FOR EACH ROW
+BEGIN
+    DECLARE trabajador_existente INT;
+    SET trabajador_existente = (SELECT COUNT(*) FROM trabajador WHERE trabajador_id = NEW.id_trabajador);
+    IF trabajador_existente = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador no existe en la tabla trabajador';
+    END IF;
+
+    SET trabajador_existente = (SELECT COUNT(*) FROM direccion WHERE id_trabajador = NEW.id_trabajador);
+    IF trabajador_existente > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador ya ha sido utilizado en la tabla direccion';
+    END IF;
+END;
+
+CREATE TRIGGER validar_id_trabajador_estudio
+BEFORE INSERT ON estudio
+FOR EACH ROW
+BEGIN
+    DECLARE trabajador_existente INT;
+    SET trabajador_existente = (SELECT COUNT(*) FROM trabajador WHERE trabajador_id = NEW.id_trabajador);
+    IF trabajador_existente = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador no existe en la tabla trabajador';
+    END IF;
+
+    SET trabajador_existente = (SELECT COUNT(*) FROM estudio WHERE id_trabajador = NEW.id_trabajador);
+    IF trabajador_existente > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El id_trabajador ya ha sido utilizado en la tabla estudio';
+    END IF;
+END;
+
+SELECT * from contrato;
+SELECT * from cuenta_bancaria;
+SELECT * from direccion;
+SELECT * from estudio;
+SELECT * from sueldo;
+SELECT * from trabajador;
+SELECT * from usuario;
