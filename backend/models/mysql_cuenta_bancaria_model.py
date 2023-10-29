@@ -5,17 +5,21 @@ class CuentaBancariaModel:
         self.mysql_pool = MySQLPool()
 
     def create_cuenta_bancaria(self, id_trabajador, cuenta_bancaria_codigo_cci, cuenta_bancaria_codigo, cuenta_bancaria_banco, cuenta_bancaria_tipo):
-        data = {
-            'id_trabajador': id_trabajador,
-            'cuenta_bancaria_codigo_cci': cuenta_bancaria_codigo_cci,
-            'cuenta_bancaria_codigo': cuenta_bancaria_codigo,
-            'cuenta_bancaria_banco': cuenta_bancaria_banco,
-            'cuenta_bancaria_tipo': cuenta_bancaria_tipo
-        }
-        query = """INSERT INTO cuenta_bancaria (id_trabajador, cuenta_bancaria_codigo_cci, cuenta_bancaria_codigo, cuenta_bancaria_banco, cuenta_bancaria_tipo) 
-                   VALUES (%(id_trabajador)s, %(cuenta_bancaria_codigo_cci)s, %(cuenta_bancaria_codigo)s, %(cuenta_bancaria_banco)s, %(cuenta_bancaria_tipo)s)"""
-        cursor = self.mysql_pool.execute(query, data, commit=True)
-        return data
+        try:
+            data = {
+                'id_trabajador': id_trabajador,
+                'cuenta_bancaria_codigo_cci': cuenta_bancaria_codigo_cci,
+                'cuenta_bancaria_codigo': cuenta_bancaria_codigo,
+                'cuenta_bancaria_banco': cuenta_bancaria_banco,
+                'cuenta_bancaria_tipo': cuenta_bancaria_tipo
+            }
+            query = """INSERT INTO cuenta_bancaria (id_trabajador, cuenta_bancaria_codigo_cci, cuenta_bancaria_codigo, cuenta_bancaria_banco, cuenta_bancaria_tipo) 
+                    VALUES (%(id_trabajador)s, %(cuenta_bancaria_codigo_cci)s, %(cuenta_bancaria_codigo)s, %(cuenta_bancaria_banco)s, %(cuenta_bancaria_tipo)s)"""
+            cursor = self.mysql_pool.execute(query, data, commit=True)
+            return data
+        except Exception as e:
+                error_message = str(e)  # Obtener el mensaje de error específico
+                return {'error': error_message}
 
     def update_cuenta_bancaria(self, id_trabajador, cuenta_bancaria_codigo_cci, cuenta_bancaria_codigo, cuenta_bancaria_banco, cuenta_bancaria_tipo):
         data = {

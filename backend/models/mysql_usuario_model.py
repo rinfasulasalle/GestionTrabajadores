@@ -46,20 +46,24 @@ class UsuarioModel:
         return data
 
     def create_usuario(self, id, usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia,usuario_sexo,usuario_telefono,):
-        data = {
-            'id': id,
-            'usuario_rol': usuario_rol,
-            'usuario_nombres': usuario_nombres,
-            'usuario_apellidos': usuario_apellidos,
-            'usuario_correo': usuario_correo,
-            'usuario_contrasenia': usuario_contrasenia,
-            'usuario_sexo': usuario_sexo,
-            'usuario_telefono': usuario_telefono,
-        }
-        query = """INSERT INTO usuario (id,usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia, usuario_sexo, usuario_telefono) 
-                   VALUES (%(id)s, %(usuario_rol)s, %(usuario_nombres)s, %(usuario_apellidos)s, %(usuario_correo)s, %(usuario_contrasenia)s, %(usuario_sexo)s, %(usuario_telefono)s)"""
-        cursor = self.mysql_pool.execute(query, data, commit=True)
-        return data
+        try:
+            data = {
+                'id': id,
+                'usuario_rol': usuario_rol,
+                'usuario_nombres': usuario_nombres,
+                'usuario_apellidos': usuario_apellidos,
+                'usuario_correo': usuario_correo,
+                'usuario_contrasenia': usuario_contrasenia,
+                'usuario_sexo': usuario_sexo,
+                'usuario_telefono': usuario_telefono,
+            }
+            query = """INSERT INTO usuario (id,usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia, usuario_sexo, usuario_telefono) 
+                    VALUES (%(id)s, %(usuario_rol)s, %(usuario_nombres)s, %(usuario_apellidos)s, %(usuario_correo)s, %(usuario_contrasenia)s, %(usuario_sexo)s, %(usuario_telefono)s)"""
+            cursor = self.mysql_pool.execute(query, data, commit=True)
+            return data
+        except Exception as e:
+            error_message = str(e)  # Obtener el mensaje de error específico
+            return {'error': error_message}
 
     def update_usuario(self, id, usuario_rol, usuario_nombres, usuario_apellidos, usuario_correo, usuario_contrasenia, usuario_sexo, usuario_telefono ):
         data = {

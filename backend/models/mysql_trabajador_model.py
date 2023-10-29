@@ -58,22 +58,26 @@ class TrabajadorModel:
         return data
 
     def create_trabajador(self, trabajador_id, trabajador_fecha_nacimiento, trabajador_tipo_documento, trabajador_path_documento, trabajador_nacionalidad, trabajador_ubigeo, trabajador_estado_civil, trabajador_path_doc_estado_civil, trabajador_fecha_ingreso, trabajador_exp_previa):
-        data = {
-            'trabajador_id': trabajador_id,
-            'trabajador_fecha_nacimiento': trabajador_fecha_nacimiento,
-            'trabajador_tipo_documento': trabajador_tipo_documento,
-            'trabajador_path_documento': trabajador_path_documento,
-            'trabajador_nacionalidad': trabajador_nacionalidad,
-            'trabajador_ubigeo': trabajador_ubigeo,
-            'trabajador_estado_civil': trabajador_estado_civil,
-            'trabajador_path_doc_estado_civil': trabajador_path_doc_estado_civil,
-            'trabajador_fecha_ingreso': trabajador_fecha_ingreso,
-            'trabajador_exp_previa': trabajador_exp_previa
-        }
-        query = """INSERT INTO trabajador (trabajador_id, trabajador_fecha_nacimiento, trabajador_tipo_documento, trabajador_path_documento, trabajador_nacionalidad, trabajador_ubigeo, trabajador_estado_civil, trabajador_path_doc_estado_civil, trabajador_fecha_ingreso,trabajador_exp_previa) 
-                   VALUES (%(trabajador_id)s, %(trabajador_fecha_nacimiento)s, %(trabajador_tipo_documento)s, %(trabajador_path_documento)s, %(trabajador_nacionalidad)s, %(trabajador_ubigeo)s, %(trabajador_estado_civil)s, %(trabajador_path_doc_estado_civil)s, %(trabajador_fecha_ingreso)s, %(trabajador_exp_previa)s)"""
-        cursor = self.mysql_pool.execute(query, data, commit=True)
-        return data
+        try:
+            data = {
+                'trabajador_id': trabajador_id,
+                'trabajador_fecha_nacimiento': trabajador_fecha_nacimiento,
+                'trabajador_tipo_documento': trabajador_tipo_documento,
+                'trabajador_path_documento': trabajador_path_documento,
+                'trabajador_nacionalidad': trabajador_nacionalidad,
+                'trabajador_ubigeo': trabajador_ubigeo,
+                'trabajador_estado_civil': trabajador_estado_civil,
+                'trabajador_path_doc_estado_civil': trabajador_path_doc_estado_civil,
+                'trabajador_fecha_ingreso': trabajador_fecha_ingreso,
+                'trabajador_exp_previa': trabajador_exp_previa
+            }
+            query = """INSERT INTO trabajador (trabajador_id, trabajador_fecha_nacimiento, trabajador_tipo_documento, trabajador_path_documento, trabajador_nacionalidad, trabajador_ubigeo, trabajador_estado_civil, trabajador_path_doc_estado_civil, trabajador_fecha_ingreso,trabajador_exp_previa) 
+                    VALUES (%(trabajador_id)s, %(trabajador_fecha_nacimiento)s, %(trabajador_tipo_documento)s, %(trabajador_path_documento)s, %(trabajador_nacionalidad)s, %(trabajador_ubigeo)s, %(trabajador_estado_civil)s, %(trabajador_path_doc_estado_civil)s, %(trabajador_fecha_ingreso)s, %(trabajador_exp_previa)s)"""
+            cursor = self.mysql_pool.execute(query, data, commit=True)
+            return data
+        except Exception as e:
+                error_message = str(e)  # Obtener el mensaje de error específico
+                return {'error': error_message}
 
     def update_trabajador(self, trabajador_id, trabajador_fecha_nacimiento, trabajador_tipo_documento, trabajador_path_documento, trabajador_nacionalidad, trabajador_ubigeo, trabajador_estado_civil, trabajador_path_doc_estado_civil, trabajador_fecha_ingreso, trabajador_exp_previa):
         data = {

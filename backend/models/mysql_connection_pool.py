@@ -3,8 +3,8 @@ import mysql.connector.pooling
 
 import configparser
 config = configparser.ConfigParser()
-#config.read('/root/backend/GestionTrabajadores/sql/mysql_config.ini')
-config.read('D://mysql_config.ini')
+config.read('/root/GestionTrabajadores/sql/mysql_config.ini')
+#config.read('D://mysql_config.ini')
 dbconfig = {
     "host":config.get('mysql', 'host'),
     "port":config.get('mysql', 'port'),

@@ -6,21 +6,25 @@ class ContratoModel:
 
 
     def create_contrato(self, id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo):
-        data = {
-            'id_trabajador': id_trabajador,
-            'contrato_tipo': contrato_tipo,
-            'contrato_opcion': contrato_opcion,
-            'empleo_tipo': empleo_tipo,
-            'empleo_situacion': empleo_situacion,
-            'empleo_area': empleo_area,
-            'empleo_proyecto': empleo_proyecto,
-            'empleo_departamento': empleo_departamento,
-            'empleo_cargo': empleo_cargo
-        }
-        query = """INSERT INTO contrato (id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo) 
-                   VALUES (%(id_trabajador)s, %(contrato_tipo)s, %(contrato_opcion)s, %(empleo_tipo)s, %(empleo_situacion)s, %(empleo_area)s, %(empleo_proyecto)s, %(empleo_departamento)s, %(empleo_cargo)s)"""
-        cursor = self.mysql_pool.execute(query, data, commit=True)
-        return data
+        try:
+            data = {
+                'id_trabajador': id_trabajador,
+                'contrato_tipo': contrato_tipo,
+                'contrato_opcion': contrato_opcion,
+                'empleo_tipo': empleo_tipo,
+                'empleo_situacion': empleo_situacion,
+                'empleo_area': empleo_area,
+                'empleo_proyecto': empleo_proyecto,
+                'empleo_departamento': empleo_departamento,
+                'empleo_cargo': empleo_cargo
+            }
+            query = """INSERT INTO contrato (id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo) 
+                    VALUES (%(id_trabajador)s, %(contrato_tipo)s, %(contrato_opcion)s, %(empleo_tipo)s, %(empleo_situacion)s, %(empleo_area)s, %(empleo_proyecto)s, %(empleo_departamento)s, %(empleo_cargo)s)"""
+            cursor = self.mysql_pool.execute(query, data, commit=True)
+            return data
+        except Exception as e:
+            error_message = str(e)  # Obtener el mensaje de error específico
+            return {'error': error_message}
 
     def update_contrato(self, id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo):
         data = {

@@ -5,18 +5,22 @@ class DireccionModel:
         self.mysql_pool = MySQLPool()
 
     def create_direccion(self, id_trabajador, direccion_pais, direccion_departamento, direccion_provincia, direccion_distrito, direccion_detalle):
-        data = {
-            'id_trabajador': id_trabajador,
-            'direccion_pais': direccion_pais,
-            'direccion_departamento': direccion_departamento,
-            'direccion_provincia': direccion_provincia,
-            'direccion_distrito': direccion_distrito,
-            'direccion_detalle': direccion_detalle
-        }
-        query = """INSERT INTO direccion (id_trabajador, direccion_pais, direccion_departamento, direccion_provincia, direccion_distrito, direccion_detalle) 
-                   VALUES (%(id_trabajador)s, %(direccion_pais)s, %(direccion_departamento)s, %(direccion_provincia)s, %(direccion_distrito)s, %(direccion_detalle)s)"""
-        cursor = self.mysql_pool.execute(query, data, commit=True)
-        return data
+        try:
+            data = {
+                'id_trabajador': id_trabajador,
+                'direccion_pais': direccion_pais,
+                'direccion_departamento': direccion_departamento,
+                'direccion_provincia': direccion_provincia,
+                'direccion_distrito': direccion_distrito,
+                'direccion_detalle': direccion_detalle
+            }
+            query = """INSERT INTO direccion (id_trabajador, direccion_pais, direccion_departamento, direccion_provincia, direccion_distrito, direccion_detalle) 
+                    VALUES (%(id_trabajador)s, %(direccion_pais)s, %(direccion_departamento)s, %(direccion_provincia)s, %(direccion_distrito)s, %(direccion_detalle)s)"""
+            cursor = self.mysql_pool.execute(query, data, commit=True)
+            return data
+        except Exception as e:
+                error_message = str(e)  # Obtener el mensaje de error específico
+                return {'error': error_message}
 
     def update_direccion(self, id_trabajador, direccion_pais, direccion_departamento, direccion_provincia, direccion_distrito, direccion_detalle):
         data = {

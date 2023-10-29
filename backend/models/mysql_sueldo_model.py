@@ -5,16 +5,20 @@ class SueldoModel:
         self.mysql_pool = MySQLPool()
 
     def create_sueldo(self, id_trabajador, sueldo_valor_básico, sueldo_asigfam_porcentaje, sueldo_bono_porcentaje):
-        data = {
-            'id_trabajador': id_trabajador,
-            'sueldo_valor_básico': sueldo_valor_básico,
-            'sueldo_asigfam_porcentaje': sueldo_asigfam_porcentaje,
-            'sueldo_bono_porcentaje': sueldo_bono_porcentaje
-        }
-        query = """INSERT INTO sueldo (id_trabajador, sueldo_valor_básico, sueldo_asigfam_porcentaje, sueldo_bono_porcentaje) 
-                   VALUES (%(id_trabajador)s, %(sueldo_valor_básico)s, %(sueldo_asigfam_porcentaje)s, %(sueldo_bono_porcentaje)s)"""
-        cursor = self.mysql_pool.execute(query, data, commit=True)
-        return data
+        try:
+            data = {
+                'id_trabajador': id_trabajador,
+                'sueldo_valor_básico': sueldo_valor_básico,
+                'sueldo_asigfam_porcentaje': sueldo_asigfam_porcentaje,
+                'sueldo_bono_porcentaje': sueldo_bono_porcentaje
+            }
+            query = """INSERT INTO sueldo (id_trabajador, sueldo_valor_básico, sueldo_asigfam_porcentaje, sueldo_bono_porcentaje) 
+                    VALUES (%(id_trabajador)s, %(sueldo_valor_básico)s, %(sueldo_asigfam_porcentaje)s, %(sueldo_bono_porcentaje)s)"""
+            cursor = self.mysql_pool.execute(query, data, commit=True)
+            return data
+        except Exception as e:
+            error_message = str(e)  # Obtener el mensaje de error específico
+            return {'error': error_message}
 
     def update_sueldo(self, id_trabajador, sueldo_valor_básico, sueldo_asigfam_porcentaje, sueldo_bono_porcentaje):
         data = {

@@ -8,32 +8,36 @@ class EstudioModel:
                        estudio_regimen_laboral_aseguramiento, estudio_institucion, estudio_carrera_educativa,
                        estudio_capacitacion, estudio_especializacion, estudio_id_colegiatura,
                        estudio_fecha_colegiatura, estudio_sede_colegiatura, estudio_condicion):
-        data = {
-            'id_trabajador': id_trabajador,
-            'estudio_nivel_educativo': estudio_nivel_educativo,
-            'estudio_situacion_especial': estudio_situacion_especial,
-            'estudio_regimen_laboral': estudio_regimen_laboral,
-            'estudio_regimen_laboral_aseguramiento': estudio_regimen_laboral_aseguramiento,
-            'estudio_institucion': estudio_institucion,
-            'estudio_carrera_educativa': estudio_carrera_educativa,
-            'estudio_capacitacion': estudio_capacitacion,
-            'estudio_especializacion': estudio_especializacion,
-            'estudio_id_colegiatura': estudio_id_colegiatura,
-            'estudio_fecha_colegiatura': estudio_fecha_colegiatura,
-            'estudio_sede_colegiatura': estudio_sede_colegiatura,
-            'estudio_condicion': estudio_condicion
-        }
-        query = """INSERT INTO estudio (id_trabajador, estudio_nivel_educativo, estudio_situacion_especial,
-                   estudio_regimen_laboral, estudio_regimen_laboral_aseguramiento, estudio_institucion,
-                   estudio_carrera_educativa, estudio_capacitacion, estudio_especializacion, estudio_id_colegiatura,
-                   estudio_fecha_colegiatura, estudio_sede_colegiatura, estudio_condicion) 
-                   VALUES (%(id_trabajador)s, %(estudio_nivel_educativo)s, %(estudio_situacion_especial)s,
-                   %(estudio_regimen_laboral)s, %(estudio_regimen_laboral_aseguramiento)s, %(estudio_institucion)s,
-                   %(estudio_carrera_educativa)s, %(estudio_capacitacion)s, %(estudio_especializacion)s,
-                   %(estudio_id_colegiatura)s, %(estudio_fecha_colegiatura)s, %(estudio_sede_colegiatura)s,
-                   %(estudio_condicion)s)"""
-        cursor = self.mysql_pool.execute(query, data, commit=True)
-        return data
+        try:
+            data = {
+                'id_trabajador': id_trabajador,
+                'estudio_nivel_educativo': estudio_nivel_educativo,
+                'estudio_situacion_especial': estudio_situacion_especial,
+                'estudio_regimen_laboral': estudio_regimen_laboral,
+                'estudio_regimen_laboral_aseguramiento': estudio_regimen_laboral_aseguramiento,
+                'estudio_institucion': estudio_institucion,
+                'estudio_carrera_educativa': estudio_carrera_educativa,
+                'estudio_capacitacion': estudio_capacitacion,
+                'estudio_especializacion': estudio_especializacion,
+                'estudio_id_colegiatura': estudio_id_colegiatura,
+                'estudio_fecha_colegiatura': estudio_fecha_colegiatura,
+                'estudio_sede_colegiatura': estudio_sede_colegiatura,
+                'estudio_condicion': estudio_condicion
+            }
+            query = """INSERT INTO estudio (id_trabajador, estudio_nivel_educativo, estudio_situacion_especial,
+                    estudio_regimen_laboral, estudio_regimen_laboral_aseguramiento, estudio_institucion,
+                    estudio_carrera_educativa, estudio_capacitacion, estudio_especializacion, estudio_id_colegiatura,
+                    estudio_fecha_colegiatura, estudio_sede_colegiatura, estudio_condicion) 
+                    VALUES (%(id_trabajador)s, %(estudio_nivel_educativo)s, %(estudio_situacion_especial)s,
+                    %(estudio_regimen_laboral)s, %(estudio_regimen_laboral_aseguramiento)s, %(estudio_institucion)s,
+                    %(estudio_carrera_educativa)s, %(estudio_capacitacion)s, %(estudio_especializacion)s,
+                    %(estudio_id_colegiatura)s, %(estudio_fecha_colegiatura)s, %(estudio_sede_colegiatura)s,
+                    %(estudio_condicion)s)"""
+            cursor = self.mysql_pool.execute(query, data, commit=True)
+            return data
+        except Exception as e:
+                error_message = str(e)  # Obtener el mensaje de error específico
+                return {'error': error_message}
 
     def update_estudio(self, id_trabajador, estudio_nivel_educativo, estudio_situacion_especial, estudio_regimen_laboral,
                        estudio_regimen_laboral_aseguramiento, estudio_institucion, estudio_carrera_educativa,
