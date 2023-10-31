@@ -56,3 +56,8 @@ def get_trabajador():
 @cross_origin()
 def get_trabajadores():
     return jsonify(trabajador_model.get_trabajadores())
+
+@trabajador_blueprint.route('/all_trabajadores', methods=['GET'])
+@cross_origin()
+def get_all_trabajadores():
+    return jsonify(trabajador_model.get_all_trabajadores())
