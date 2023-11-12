@@ -10,11 +10,13 @@ cuenta_bancaria_blueprint = Blueprint('cuenta_bancaria_blueprint', __name__)
 def create_cuenta_bancaria():
     data = request.json
     id_trabajador = data['id_trabajador']
-    cuenta_bancaria_codigo_cci = data.get('cuenta_bancaria_codigo_cci', None)
-    cuenta_bancaria_codigo = data.get('cuenta_bancaria_codigo', None)
-    cuenta_bancaria_banco = data['cuenta_bancaria_banco']
-    cuenta_bancaria_tipo = data['cuenta_bancaria_tipo']
-    content = cuenta_bancaria_model.create_cuenta_bancaria(id_trabajador, cuenta_bancaria_codigo_cci, cuenta_bancaria_codigo, cuenta_bancaria_banco, cuenta_bancaria_tipo)
+    cuenta_sueldo_codigo_cci = data.get('cuenta_sueldo_codigo_cci', None)
+    cuenta_sueldo_codigo = data.get('cuenta_sueldo_codigo', None)
+    cuenta_sueldo_banco = data['cuenta_sueldo_banco']
+    cuenta_cts_codigo_cci = data.get('cuenta_cts_codigo_cci', None)
+    cuenta_cts_codigo = data.get('cuenta_cts_codigo', None)
+    cuenta_cts_banco = data['cuenta_cts_banco']
+    content = cuenta_bancaria_model.create_cuenta_bancaria(id_trabajador, cuenta_sueldo_codigo_cci, cuenta_sueldo_codigo, cuenta_sueldo_banco, cuenta_cts_codigo_cci,cuenta_cts_codigo, cuenta_cts_banco)
     return jsonify(content)
 
 @cuenta_bancaria_blueprint.route('/cuenta_bancaria', methods=['PUT'])
@@ -22,11 +24,13 @@ def create_cuenta_bancaria():
 def update_cuenta_bancaria():
     data = request.json
     id_trabajador = data['id_trabajador']
-    cuenta_bancaria_codigo_cci = data.get('cuenta_bancaria_codigo_cci', None)
-    cuenta_bancaria_codigo = data.get('cuenta_bancaria_codigo', None)
-    cuenta_bancaria_banco = data['cuenta_bancaria_banco']
-    cuenta_bancaria_tipo = data['cuenta_bancaria_tipo']
-    content = cuenta_bancaria_model.update_cuenta_bancaria(id_trabajador, cuenta_bancaria_codigo_cci, cuenta_bancaria_codigo, cuenta_bancaria_banco, cuenta_bancaria_tipo)
+    cuenta_sueldo_codigo_cci = data.get('cuenta_sueldo_codigo_cci', None)
+    cuenta_sueldo_codigo = data.get('cuenta_sueldo_codigo', None)
+    cuenta_sueldo_banco = data['cuenta_sueldo_banco']
+    cuenta_cts_codigo_cci = data.get('cuenta_cts_codigo_cci', None)
+    cuenta_cts_codigo = data.get('cuenta_cts_codigo', None)
+    cuenta_cts_banco = data['cuenta_cts_banco']
+    content = cuenta_bancaria_model.update_cuenta_bancaria(id_trabajador, cuenta_sueldo_codigo_cci, cuenta_sueldo_codigo, cuenta_sueldo_banco, cuenta_cts_codigo_cci,cuenta_cts_codigo, cuenta_cts_banco)
     return jsonify(content)
 
 @cuenta_bancaria_blueprint.route('/cuenta_bancaria', methods=['DELETE'])
