@@ -5,7 +5,7 @@ class ContratoModel:
         self.mysql_pool = MySQLPool()
 
 
-    def create_contrato(self, id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo):
+    def create_contrato(self, id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo,empleo_proyecto_rol):
         try:
             data = {
                 'id_trabajador': id_trabajador,
@@ -16,17 +16,18 @@ class ContratoModel:
                 'empleo_area': empleo_area,
                 'empleo_proyecto': empleo_proyecto,
                 'empleo_departamento': empleo_departamento,
-                'empleo_cargo': empleo_cargo
+                'empleo_cargo': empleo_cargo,
+                'empleo_proyecto_rol': empleo_proyecto_rol
             }
-            query = """INSERT INTO contrato (id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo) 
-                    VALUES (%(id_trabajador)s, %(contrato_tipo)s, %(contrato_opcion)s, %(empleo_tipo)s, %(empleo_situacion)s, %(empleo_area)s, %(empleo_proyecto)s, %(empleo_departamento)s, %(empleo_cargo)s)"""
+            query = """INSERT INTO contrato (id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo, empleo_proyecto_rol) 
+                    VALUES (%(id_trabajador)s, %(contrato_tipo)s, %(contrato_opcion)s, %(empleo_tipo)s, %(empleo_situacion)s, %(empleo_area)s, %(empleo_proyecto)s, %(empleo_departamento)s, %(empleo_cargo)s, %(empleo_proyecto_rol)s)"""
             cursor = self.mysql_pool.execute(query, data, commit=True)
             return data
         except Exception as e:
             error_message = str(e)  # Obtener el mensaje de error específico
             return {'error': error_message}
 
-    def update_contrato(self, id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo):
+    def update_contrato(self, id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo, empleo_proyecto_rol):
         data = {
             'id_trabajador': id_trabajador,
             'contrato_tipo': contrato_tipo,
@@ -36,7 +37,8 @@ class ContratoModel:
             'empleo_area': empleo_area,
             'empleo_proyecto': empleo_proyecto,
             'empleo_departamento': empleo_departamento,
-            'empleo_cargo': empleo_cargo
+            'empleo_cargo': empleo_cargo,
+            'empleo_proyecto_rol': empleo_proyecto_rol
         }
         query = """UPDATE contrato SET contrato_tipo = %(contrato_tipo)s, 
                    contrato_opcion = %(contrato_opcion)s, 
@@ -45,7 +47,8 @@ class ContratoModel:
                    empleo_area = %(empleo_area)s ,
                    empleo_proyecto = %(empleo_proyecto)s,
                    empleo_departamento = %(empleo_departamento)s,
-                   empleo_cargo = %(empleo_cargo)s
+                   empleo_cargo = %(empleo_cargo)s,
+                   empleo_proyecto_rol = %(empleo_proyecto_rol)s
                    WHERE id_trabajador = %(id_trabajador)s"""
         self.mysql_pool.execute(query, data, commit=True)
         result = {'result': 1}
@@ -73,7 +76,8 @@ class ContratoModel:
                 'empleo_area': result[6],
                 'empleo_proyecto': result[7],
                 'empleo_departamento': result[8],
-                'empleo_cargo': result[9]
+                'empleo_cargo': result[9],
+                'empleo_proyecto_rol':result[10]
             }
             data.append(content)
             content = {}
@@ -95,7 +99,8 @@ class ContratoModel:
                 'empleo_area': result[6],
                 'empleo_proyecto': result[7],
                 'empleo_departamento': result[8],
-                'empleo_cargo': result[9]
+                'empleo_cargo': result[9],
+                'empleo_proyecto_rol': result[10]
             }
             data.append(content)
             content = {}

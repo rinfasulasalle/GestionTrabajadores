@@ -18,7 +18,8 @@ def create_contrato():
     empleo_proyecto = data['empleo_proyecto']
     empleo_departamento = data['empleo_departamento']
     empleo_cargo = data['empleo_cargo']
-    content = contrato_model.create_contrato(id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo)
+    empleo_proyecto_rol = data['empleo_proyecto_rol']
+    content = contrato_model.create_contrato(id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo, empleo_proyecto_rol)
     return jsonify(content)
 
 @contrato_blueprint.route('/contrato', methods=['PUT'])
@@ -34,7 +35,8 @@ def update_contrato():
     empleo_proyecto = data['empleo_proyecto']
     empleo_departamento = data['empleo_departamento']
     empleo_cargo = data['empleo_cargo']
-    content = contrato_model.update_contrato(id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo)
+    empleo_proyecto_rol = data['empleo_proyecto_rol']
+    content = contrato_model.update_contrato(id_trabajador, contrato_tipo, contrato_opcion, empleo_tipo, empleo_situacion, empleo_area, empleo_proyecto, empleo_departamento, empleo_cargo, empleo_proyecto_rol)
     return jsonify(content)
 
 @contrato_blueprint.route('/contrato', methods=['DELETE'])
